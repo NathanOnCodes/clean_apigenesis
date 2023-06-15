@@ -7,15 +7,15 @@ import (
 	"errors"
 )
 
-type ConversionUseCase struct {
+type UseCaseConversion struct {
 	ConversionRepository repository.InterfaceConversionRepository
 }
 
-func NewConversionUseCase(conversionRepository repository.InterfaceConversionRepository) *ConversionUseCase {
-	return &ConversionUseCase{ConversionRepository: conversionRepository}
+func NewUseCaseConversion(conversionRepository repository.InterfaceConversionRepository) *UseCaseConversion {
+	return &UseCaseConversion{ConversionRepository: conversionRepository}
 }
 
-func (service *ConversionUseCase) Create(amount, rate float64, to string) (*entity.Conversion, error) {
+func (service *UseCaseConversion) Create(amount, rate float64, to string) (*entity.Conversion, error) {
 	calcParamsResult := amount * rate
 
 	var symbol string
@@ -34,13 +34,13 @@ func (service *ConversionUseCase) Create(amount, rate float64, to string) (*enti
 
 	}
 
-	conversion := entity.NewConversion(to, symbol, calcParamsResult)
+	conversion := entity.New(to, symbol, calcParamsResult)
 	service.ConversionRepository.Create(conversion)
 
 	return conversion, nil
 }
 
-func (service *ConversionUseCase) FindAll() ([]entity.Conversion, error) {
+func (service *UseCaseConversion) FindAll() ([]entity.Conversion, error) {
 	data, err := service.ConversionRepository.FindAll()
 
 	if err != nil {

@@ -11,11 +11,11 @@ import (
 
 
 type ConversionHandler struct {
-	newConversionUseCase *use_cases.ConversionUseCase
+	newConversionUseCase *use_cases.UseCaseConversion
 }
 
-func NewConversiontHandler(conversionService *use_cases.ConversionUseCase) *ConversionHandler {
-	return &ConversionHandler{ newConversionUseCase: conversionService,	}
+func NewHandler(property *use_cases.UseCaseConversion) *ConversionHandler {
+	return &ConversionHandler{ newConversionUseCase: property,	}
 }
 
 func (h *ConversionHandler) IndexExchangeEndPoint(ctx echo.Context) error {

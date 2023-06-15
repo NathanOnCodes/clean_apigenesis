@@ -6,7 +6,7 @@ type Conversion struct {
 	Value float64	`json:"value" bson:"value"`
 }
 
-func NewConversion(name, symbol string, value float64) *Conversion{
+func New(name, symbol string, value float64) *Conversion{
 	return &Conversion{
 		NameCoin: name,
 		SymbolCoin: symbol,

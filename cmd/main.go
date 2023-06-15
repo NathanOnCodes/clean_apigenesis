@@ -17,9 +17,9 @@ func main(){
 	}
 	defer client.Close()
 	
-	conversionRepository := repository.NewMongoDBConversionRepository(client.GetClient())
-	conversionUseCase := use_cases.NewConversionUseCase(conversionRepository)
-	conversionHandler := handler.NewConversiontHandler(conversionUseCase)
+	conversionRepository := repository.NewMongoDB(client.GetClient())
+	conversionUseCase := use_cases.NewUseCaseConversion(conversionRepository)
+	conversionHandler := handler.NewHandler(conversionUseCase)
 
 	app := echo.New()
 	app.Use(middleware.Recover())
@@ -31,7 +31,7 @@ func main(){
 
 
 func configureRoutes(app *echo.Echo, ctx *handler.ConversionHandler) {
-	app.GET("/exchange", ctx.IndexExchangeEndPoint)
-	app.POST("/exchange/:amount/:from/:to/:rate", ctx.CreateConversionEndPoint)
-	app.GET("/exchange/logs", ctx.FindAllEndPoint)
+	app.GET("/api/v1/exchange", ctx.IndexExchangeEndPoint)
+	app.POST("/api/v1/exchange/:amount/:from/:to/:rate", ctx.CreateConversionEndPoint)
+	app.GET("/api/v1/exchange/logs", ctx.FindAllEndPoint)
 }

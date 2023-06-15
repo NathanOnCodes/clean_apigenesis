@@ -18,7 +18,7 @@ type MongoDBConversionRepository struct {
 }
 
 
-func NewMongoDBConversionRepository(mongodb *mongo.Client) *MongoDBConversionRepository {
+func NewMongoDB(mongodb *mongo.Client) *MongoDBConversionRepository {
 	return &MongoDBConversionRepository{client: mongodb}
 }
 
